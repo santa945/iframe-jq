@@ -1,0 +1,22 @@
+{
+  "name": "telephone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp server",
+    "build": "gulp build"
+  },
+  "keywords": [
+    "telephone"
+  ],
+  "author": "Bruce",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglifycss": "^1.1.0",
+    "http-proxy-middleware": "^0.19.1"
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index.html</title>
+</head>
+
+<body>
+  <div>
+    <iframe src="http://localhost:8080/a.html" id="myIFrame" width="100%"></iframe>
+    <iframe src="http://localhost:7070/b.html" id="anotherIFrame" width="100%"></iframe>
+    <iframe src="http://localhost:8080/c.html" id="cIframe" frameborder="0"></iframe>
+    <div style="background: #eee;">
+      <p>主页面：localhost:8080/index.html</p>
+      <button id="btn">
+        发送数据
+      </button>
+      <ul>
+      </ul>
+    </div>
+  </div>
+  <script src="jquery.js"></script>
+  <script>
+    var domain = 'http://localhost:8080';
+    var domainB = 'http://localhost:7070';
+    var iframe = document.getElementById('myIFrame').contentWindow;
+    var thirdFrame = $("#thirdFrame");
+    // var cIframe = $("#cIframe");//一旦定义出变量，则a.html无法改变该src
+    var anotheriframe = document.getElementById('anotherIFrame').contentWindow;
+   
+    //全局变量
+    var params = {}
+    //发送消息
+    $('#btn').on('click',function() {
+      var message = "{我是index.html的数据}"
+      iframe.postMessage(message, domain);
+      anotheriframe.postMessage(message, domainB);
+    });
+    //响应事件
+    window.addEventListener('message', function (event) {
+      if(event.data){
+        $("ul").append(`<li>${event.origin} 发来的数据 : { ${event.data} }</li>`);
+      }
+    }, false);
+
+
+    function sayHi(data){
+      console.log("params=",params)
+    }
+  </script>
+</body>
+
+</html>

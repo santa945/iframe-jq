@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>b.html</title>
+    <style>
+        ul {
+            overflow: hidden;
+            list-style: none;
+        }
+
+        li {
+            float: left;
+            width: 80px;
+            border: 1px solid #000;
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>localhost:7070/b.html</div>
+    <p>
+       <ul>
+           <li>AAA</li>
+           <li>BBB</li>
+           <li>CCC</li>
+           <li>DDD</li>
+           <li>EEE</li>
+       </ul>
+
+    </p>
+    <div id="son">
+
+    </div>
+</body>
+<script src="jquery.js"></script>
+<script>
+    $("ul").on("click",function(e){
+        var target = e.target;
+        var domain = 'http://localhost:8080';
+        window.top.postMessage(target.innerHTML, domain);
+    })
+    window.addEventListener('message', function (event) {
+        if(event.data){
+        $("#son").append(`<p>父级页面发来的数据 : { ${event.data} }</p>`)
+      }
+    }, false);
+    
+</script>
+
+</html>
